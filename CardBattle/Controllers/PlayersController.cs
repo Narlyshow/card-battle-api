@@ -1,4 +1,5 @@
-﻿using CardBattle.Application.ViewModels;
+﻿using CardBattle.Application.Services;
+using CardBattle.Application.ViewModels;
 using CardBattle.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +39,27 @@ namespace CardBattle.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        
+        [HttpPost]
+        [Route("Login")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult> Login([FromBody] LoginViewModel loginViewModel)
+        {
+            var user = new Players(loginViewModel.Email, loginViewModel.Senha);
+
+            var result = _playersRepository.Get(user);
+
+            if (result == null)
+            {
+                return Unauthorized("Usuário ou senha inválidos.");
+            }
+
+            var token = TokenService.GenerateToken(new Players());
+            return Ok(token);
+        }
+
 
 
     }

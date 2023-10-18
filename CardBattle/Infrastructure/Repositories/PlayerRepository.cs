@@ -10,5 +10,15 @@ namespace CardBattle.Infrastructure.Repositories
             _context.Players.Add(players);
             _context.SaveChanges();
         }
+
+        public Players Get(Players players)
+        {
+            var user =  _context.Players.FirstOrDefault(p => p.email == players.email && p.senha == players.senha);
+            if (user != null)
+            {
+                return user;
+            }
+            return null;
+        }
     }
 }

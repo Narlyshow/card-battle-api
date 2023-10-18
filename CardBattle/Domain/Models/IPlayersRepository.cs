@@ -3,6 +3,8 @@
     public interface IPlayersRepository
     {
         void Add(Players players);
+
+        Players Get(Players players);
         
     }
 }

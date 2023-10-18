@@ -22,6 +22,6 @@ namespace CardBattle.Controllers
             return BadRequest("username or password invalid");
         }
     
-    
+        
     }
 }
