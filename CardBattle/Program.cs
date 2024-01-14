@@ -40,6 +40,17 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name:"Mypolice",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:8080")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddTransient<IPlayersRepository, PlayerRepository>();
 
 var key = Encoding.ASCII.GetBytes(CardBattle.Key.Secret);
@@ -69,6 +80,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("Mypolice");
 
 app.UseHttpsRedirection();
 
