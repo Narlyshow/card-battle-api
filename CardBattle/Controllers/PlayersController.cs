@@ -60,7 +60,18 @@ namespace CardBattle.Controllers
             return Ok(token);
         }
 
+        [HttpGet]
+        [Route("PlayerInformation")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType ((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult> PlayerInformation(string email)
+        {
+            var user = new Players(email);
 
+            var result = _playersRepository.GetPlayerInformation(user);
+
+            return Ok(result);
+        }
 
     }
 }

@@ -10,6 +10,11 @@ namespace CardBattle.Domain.Models
         {
         }
 
+        public Players(string email)
+        {
+            this.email = email;
+        }
+
         public Players(string email, string senha)
         {
             this.email = email;

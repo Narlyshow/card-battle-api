@@ -20,5 +20,15 @@ namespace CardBattle.Infrastructure.Repositories
             }
             return null;
         }
+
+        public Players GetPlayerInformation(Players players)
+        {
+            var user = _context.Players.FirstOrDefault(p => p.email == players.email);
+            if (user != null)
+            {
+                return user;
+            }
+            return null;
+        }
     }
 }
